@@ -1,26 +1,173 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root,
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --background: #0f0f14;
+  --foreground: #f5f5f7;
+
+  --ds-color-canvas: #0f0f14;
+  --ds-color-canvas-deep: #130f23;
+  --ds-color-panel: rgb(19 15 35 / 0.8);
+  --ds-color-surface: rgb(255 255 255 / 0.05);
+  --ds-color-surface-strong: rgb(255 255 255 / 0.08);
+  --ds-color-surface-elevated: #1e293b;
+  --ds-color-line: rgb(255 255 255 / 0.1);
+  --ds-color-line-strong: rgb(255 255 255 / 0.15);
+
+  --ds-color-primary: #7c5cff;
+  --ds-color-primary-hover: #6d4fe6;
+  --ds-color-primary-soft: rgb(124 92 255 / 0.2);
+  --ds-color-primary-faint: rgb(124 92 255 / 0.15);
+  --ds-color-primary-veil: rgb(124 92 255 / 0.05);
+  --ds-color-secondary: #ff4fd8;
+  --ds-color-accent: #00e5ff;
+  --ds-color-highlight: #ffd166;
+
+  --ds-color-ink: #f5f5f7;
+  --ds-color-muted: #9ca3af;
+  --ds-color-subtle: #64748b;
+
+  --ds-color-success: #34d399;
+  --ds-color-danger: #fb7185;
+  --ds-color-warning: #fbbf24;
+
+  --ds-color-chart-1: #7c5cff;
+  --ds-color-chart-2: #ff4fd8;
+  --ds-color-chart-3: #00e5ff;
+  --ds-color-chart-4: #ffd166;
+  --ds-color-chart-5: #ff6b6b;
+  --ds-color-chart-6: #5eead4;
+  --ds-color-chart-7: #c084fc;
+
+  --ds-radius-control: 0.75rem;
+  --ds-radius-card: 1rem;
+  --ds-radius-panel: 1.5rem;
+
+  --ds-shadow-glass: 0 18px 50px rgb(15 15 20 / 0.28);
+  --ds-shadow-glow-sm: 0 0 20px rgb(124 92 255 / 0.25);
+  --ds-shadow-glow-md: 0 0 28px rgb(124 92 255 / 0.32);
+
+  --ds-blur-glass: 16px;
+  --ds-background-app:
+    radial-gradient(circle at 20% 30%, rgb(26 26 46 / 0.95), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgb(42 30 92 / 0.9), transparent 40%),
+    linear-gradient(180deg, #130f23 0%, #0f0f14 100%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-canvas: var(--ds-color-canvas);
+  --color-canvas-deep: var(--ds-color-canvas-deep);
+  --color-panel: var(--ds-color-panel);
+  --color-surface: var(--ds-color-surface);
+  --color-surface-strong: var(--ds-color-surface-strong);
+  --color-surface-elevated: var(--ds-color-surface-elevated);
+  --color-line: var(--ds-color-line);
+  --color-line-strong: var(--ds-color-line-strong);
+  --color-primary: var(--ds-color-primary);
+  --color-primary-hover: var(--ds-color-primary-hover);
+  --color-primary-soft: var(--ds-color-primary-soft);
+  --color-primary-faint: var(--ds-color-primary-faint);
+  --color-primary-veil: var(--ds-color-primary-veil);
+  --color-secondary: var(--ds-color-secondary);
+  --color-accent: var(--ds-color-accent);
+  --color-highlight: var(--ds-color-highlight);
+  --color-ink: var(--ds-color-ink);
+  --color-muted: var(--ds-color-muted);
+  --color-subtle: var(--ds-color-subtle);
+  --color-success: var(--ds-color-success);
+  --color-danger: var(--ds-color-danger);
+  --color-warning: var(--ds-color-warning);
+  --color-chart-1: var(--ds-color-chart-1);
+  --color-chart-2: var(--ds-color-chart-2);
+  --color-chart-3: var(--ds-color-chart-3);
+  --color-chart-4: var(--ds-color-chart-4);
+  --color-chart-5: var(--ds-color-chart-5);
+  --color-chart-6: var(--ds-color-chart-6);
+  --color-chart-7: var(--ds-color-chart-7);
+  --radius-control: var(--ds-radius-control);
+  --radius-card: var(--ds-radius-card);
+  --radius-panel: var(--ds-radius-panel);
+  --shadow-glass: var(--ds-shadow-glass);
+  --shadow-glow-sm: var(--ds-shadow-glow-sm);
+  --shadow-glow-md: var(--ds-shadow-glow-md);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root[data-theme="light"],
+[data-theme="light"] {
+  --background: #f7f7fb;
+  --foreground: #0f172a;
+
+  --ds-color-canvas: #f7f7fb;
+  --ds-color-canvas-deep: #f1f5f9;
+  --ds-color-panel: rgb(255 255 255 / 0.84);
+  --ds-color-surface: rgb(255 255 255 / 0.72);
+  --ds-color-surface-strong: rgb(255 255 255 / 0.92);
+  --ds-color-surface-elevated: #e2e8f0;
+  --ds-color-line: rgb(226 232 240 / 0.95);
+  --ds-color-line-strong: rgb(203 213 225 / 0.95);
+
+  --ds-color-primary: #7c5cff;
+  --ds-color-primary-hover: #6d4fe6;
+  --ds-color-primary-soft: #e9e4ff;
+  --ds-color-primary-faint: rgb(124 92 255 / 0.12);
+  --ds-color-primary-veil: rgb(124 92 255 / 0.08);
+  --ds-color-secondary: #f472b6;
+  --ds-color-accent: #818cf8;
+  --ds-color-highlight: #fbbf24;
+
+  --ds-color-ink: #0f172a;
+  --ds-color-muted: #64748b;
+  --ds-color-subtle: #94a3b8;
+
+  --ds-color-success: #10b981;
+  --ds-color-danger: #ec4899;
+  --ds-color-warning: #f59e0b;
+
+  --ds-color-chart-1: #7c5cff;
+  --ds-color-chart-2: #f472b6;
+  --ds-color-chart-3: #818cf8;
+  --ds-color-chart-4: #fbbf24;
+  --ds-color-chart-5: #10b981;
+  --ds-color-chart-6: #c084fc;
+  --ds-color-chart-7: #6366f1;
+
+  --ds-shadow-glass: 0 18px 45px rgb(15 23 42 / 0.08);
+  --ds-shadow-glow-sm: 0 0 18px rgb(124 92 255 / 0.16);
+  --ds-shadow-glow-md: 0 0 24px rgb(124 92 255 / 0.2);
+  --ds-background-app:
+    radial-gradient(circle at 18% 16%, rgb(124 92 255 / 0.12), transparent 32%),
+    radial-gradient(circle at 82% 20%, rgb(129 140 248 / 0.1), transparent 28%),
+    linear-gradient(180deg, #fbfcff 0%, #f7f7fb 100%);
+}
+
+@utility app-backdrop {
+  background-color: var(--ds-color-canvas-deep);
+  background-image: var(--ds-background-app);
+}
+
+@utility glass-card {
+  background: var(--ds-color-surface);
+  border: 1px solid var(--ds-color-line);
+  border-radius: var(--ds-radius-panel);
+  box-shadow: var(--ds-shadow-glass);
+  backdrop-filter: blur(var(--ds-blur-glass));
+}
+
+@utility glass-card-strong {
+  background: var(--ds-color-surface-strong);
+  border: 1px solid var(--ds-color-line-strong);
+  border-radius: var(--ds-radius-panel);
+  box-shadow: var(--ds-shadow-glass);
+  backdrop-filter: blur(var(--ds-blur-glass));
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
