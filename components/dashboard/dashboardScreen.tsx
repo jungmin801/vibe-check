@@ -35,7 +35,7 @@ export function MusicInsightsDashboardScreen() {
   return (
     <div data-theme={theme} className="app-backdrop min-h-screen text-ink antialiased">
       <AppHeader
-        activeNav="Insights"
+        activeNav="Dashboard"
         leadingActions={
           <IconButton
             label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}

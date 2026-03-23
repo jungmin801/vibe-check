@@ -58,8 +58,8 @@ export function LoginScreen() {
                 cinematic environment.
               </p>
 
-              <button
-                type="button"
+              <a
+                href="/api/auth/login"
                 className={`mx-auto mt-12 inline-flex h-[68px] w-full max-w-[256px] items-center justify-center gap-3 rounded-full border font-bold shadow-[0_12px_30px_rgba(29,185,84,0.28)] transition hover:scale-[1.01] hover:brightness-105 ${
                   theme === "dark"
                     ? "border-white/20 bg-[#1DB954] text-black"
@@ -68,7 +68,7 @@ export function LoginScreen() {
               >
                 <SpotifyIcon className="size-[18px]" />
                 <span className="text-lg tracking-[-0.025em]">Login with Spotify</span>
-              </button>
+              </a>
 
               <div className="mt-14 space-y-2 text-center">
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-subtle">
