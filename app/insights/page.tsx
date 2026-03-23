@@ -1,15 +1,10 @@
-import { Public_Sans } from "next/font/google";
-import { MusicDnaScreen } from "@/components/screens/InsightsScreen";
-
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
-});
+import { MusicDnaScreen } from "@/components/insight/insightScreen";
+import { ScreenPage } from "@/components/shared/ScreenPage";
 
 export default function MusicDnaPage() {
   return (
-    <div className={`${publicSans.className} min-h-screen`} data-theme="light">
+    <ScreenPage>
       <MusicDnaScreen />
-    </div>
+    </ScreenPage>
   );
 }
