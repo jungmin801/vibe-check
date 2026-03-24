@@ -3,8 +3,8 @@
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { PageContainer } from "@/components/shared/PageContainer";
-import { IconButton } from "@/components/ui/IconButton";
-import { BellIcon, SearchIcon } from "@/components/ui/Icons";
+import { LogoutIcon } from "@/components/ui/Icons";
+import { useSpotifyMeQuery } from "@/lib/spotify/queries";
 
 const navItems = ["Dashboard", "Insights"] as const;
 
@@ -13,7 +13,11 @@ type AppHeaderProps = {
   leadingActions?: ReactNode;
 };
 
-export function AppHeader({ activeNav = "Dashboard", leadingActions }: AppHeaderProps) {
+export function AppHeader({
+  activeNav = "Dashboard",
+  leadingActions,
+}: AppHeaderProps) {
+  const { data: me, isPending } = useSpotifyMeQuery();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const avatarButtonRef = useRef<HTMLButtonElement>(null);
@@ -55,6 +59,14 @@ export function AppHeader({ activeNav = "Dashboard", leadingActions }: AppHeader
     setIsMenuOpen((open) => !open);
   }
 
+  const avatarLabel = me?.avatarLabel ?? "?";
+  const displayName = me?.displayName ?? "Spotify User";
+  const avatarStyle = me?.imageUrl
+    ? {
+        backgroundImage: `url("${me.imageUrl}")`,
+      }
+    : undefined;
+
   return (
     <header className="sticky top-0 z-20 overflow-visible border-b border-primary-faint bg-panel backdrop-blur-md">
       <PageContainer className="flex h-[65px] items-center justify-between overflow-visible">
@@ -62,7 +74,9 @@ export function AppHeader({ activeNav = "Dashboard", leadingActions }: AppHeader
           <div className="flex size-9 items-center justify-center rounded-control bg-primary-soft">
             <span className="text-sm font-black text-primary">V</span>
           </div>
-          <span className="text-xl font-black tracking-tight text-ink">VibeCheck Insight</span>
+          <span className="text-xl font-black tracking-tight text-ink">
+            VibeCheck
+          </span>
         </div>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -87,12 +101,6 @@ export function AppHeader({ activeNav = "Dashboard", leadingActions }: AppHeader
 
         <div className="flex items-center gap-2">
           {leadingActions}
-          <IconButton label="Search">
-            <SearchIcon className="size-4" />
-          </IconButton>
-          <IconButton label="Notifications">
-            <BellIcon className="size-4" />
-          </IconButton>
 
           <div ref={menuRef} className="relative ml-1">
             <button
@@ -100,24 +108,37 @@ export function AppHeader({ activeNav = "Dashboard", leadingActions }: AppHeader
               type="button"
               aria-haspopup="menu"
               aria-expanded={isMenuOpen}
-              aria-label="Open profile menu"
+              aria-label={`${displayName} 프로필 메뉴 열기`}
               className="rounded-full border-2 border-primary-faint p-0.5 transition hover:border-primary"
               onClick={toggleMenu}
             >
-              <div className="size-8 rounded-full bg-gradient-to-br from-violet-400 to-indigo-700" />
+              <div
+                className={`flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-indigo-700 bg-cover bg-center text-xs font-black text-white ${
+                  isPending ? "animate-pulse" : ""
+                }`}
+                style={avatarStyle}
+              >
+                {me?.imageUrl ? null : <span>{avatarLabel}</span>}
+              </div>
             </button>
 
             {isMenuOpen ? (
               <div
-                className="fixed z-[100] min-w-[120px] rounded-card border border-line bg-panel p-2 shadow-glass backdrop-blur-md"
+                className="fixed z-[100] min-w-[180px] rounded-card border border-line bg-panel p-2 shadow-glass backdrop-blur-md"
                 style={{ top: menuPosition.top, left: menuPosition.left }}
               >
+                <div className="border-b border-primary-faint px-3 py-2">
+                  <p className="truncate text-sm font-semibold text-ink">
+                    Hello, {displayName || "Spotify User"}
+                  </p>
+                </div>
                 <form method="POST" action="/api/auth/logout">
                   <button
                     type="submit"
-                    className="flex w-full items-center rounded-md px-3 py-2 text-left text-sm font-semibold text-ink transition hover:bg-primary-faint"
+                    className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-ink transition hover:bg-primary-faint"
                   >
-                    로그아웃
+                    <LogoutIcon className="size-4" />
+                    Sign Out
                   </button>
                 </form>
               </div>

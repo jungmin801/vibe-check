@@ -10,7 +10,13 @@ export function SpotifyIcon(props: SVGProps<SVGSVGElement>) {
 
 export function SearchIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <svg
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -22,7 +28,13 @@ export function SearchIcon(props: SVGProps<SVGSVGElement>) {
 
 export function BellIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <svg
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -34,7 +46,13 @@ export function BellIcon(props: SVGProps<SVGSVGElement>) {
 
 export function MoonIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <svg
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -46,7 +64,13 @@ export function MoonIcon(props: SVGProps<SVGSVGElement>) {
 
 export function SunIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <svg
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -58,11 +82,40 @@ export function SunIcon(props: SVGProps<SVGSVGElement>) {
 
 export function ShareIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+    <svg
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+      />
+    </svg>
+  );
+}
+
+export function LogoutIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 3.75h2.25A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25h-2.25"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M10.5 16.5L15 12m0 0l-4.5-4.5M15 12H3.75"
       />
     </svg>
   );
