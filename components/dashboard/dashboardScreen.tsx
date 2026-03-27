@@ -9,6 +9,13 @@ import { MoonIcon, SunIcon } from "@/components/ui/Icons";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { SurfaceCard } from "@/components/ui/SurfaceCard";
+import {
+  useCurrentlyPlayingQuery,
+  useGenreDistributionQuery,
+  useRecentlyPlayedQuery,
+  useTopArtistsQuery,
+  useTopTracksQuery,
+} from "@/lib/spotify/queries";
 
 const genres = [
   { label: "Synthpop", pct: 38, color: "bg-chart-1" },
@@ -31,17 +38,39 @@ type Theme = "light" | "dark";
 
 export function MusicInsightsDashboardScreen() {
   const [theme, setTheme] = useState<Theme>("light");
+  // const { data: currentlyPlaying } = useCurrentlyPlayingQuery();
+  // const { data: recentlyPlayed } = useRecentlyPlayedQuery(5);
+
+  // console.log("currentlyPlaying", currentlyPlaying);
+  // console.log("recentlyPlayed", recentlyPlayed);
+
+  // const { data: topTracks } = useTopTracksQuery("short_term", 5);
+  // console.log("topTracks", topTracks);
+
+  const { data: genreDistribution } = useGenreDistributionQuery("short_term");
+  console.log("genreDistribution", genreDistribution);
 
   return (
-    <div data-theme={theme} className="app-backdrop min-h-screen text-ink antialiased">
+    <div
+      data-theme={theme}
+      className="app-backdrop min-h-screen text-ink antialiased"
+    >
       <AppHeader
         activeNav="Dashboard"
         leadingActions={
           <IconButton
-            label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
-            onClick={() => setTheme((prev) => (prev === "light" ? "dark" : "light"))}
+            label={
+              theme === "light" ? "Switch to dark mode" : "Switch to light mode"
+            }
+            onClick={() =>
+              setTheme((prev) => (prev === "light" ? "dark" : "light"))
+            }
           >
-            {theme === "light" ? <MoonIcon className="size-4" /> : <SunIcon className="size-4" />}
+            {theme === "light" ? (
+              <MoonIcon className="size-4" />
+            ) : (
+              <SunIcon className="size-4" />
+            )}
           </IconButton>
         }
       />
@@ -67,8 +96,12 @@ export function MusicInsightsDashboardScreen() {
           <SurfaceCard className="flex w-full max-w-sm flex-col gap-3 p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-ink">Syncing your library...</p>
-                <p className="text-xs text-muted">Latest activity from your Spotify profile</p>
+                <p className="text-sm font-semibold text-ink">
+                  Syncing your library...
+                </p>
+                <p className="text-xs text-muted">
+                  Latest activity from your Spotify profile
+                </p>
               </div>
               <span className="rounded-full bg-primary-soft px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-primary">
                 Active
@@ -92,7 +125,9 @@ export function MusicInsightsDashboardScreen() {
                 <div className="min-w-0 flex-1 space-y-3">
                   <div>
                     <p className="text-xl font-bold text-ink">Midnight City</p>
-                    <p className="text-sm text-muted">M83 • Hurry Up, We&apos;re Dreaming</p>
+                    <p className="text-sm text-muted">
+                      M83 • Hurry Up, We&apos;re Dreaming
+                    </p>
                   </div>
                   <div className="space-y-2">
                     <ProgressBar value={68} className="h-1.5" />
@@ -112,7 +147,9 @@ export function MusicInsightsDashboardScreen() {
 
             <SurfaceCard className="p-6">
               <div className="mb-6 flex items-start justify-between">
-                <h2 className="text-sm font-bold text-ink">Genre Distribution</h2>
+                <h2 className="text-sm font-bold text-ink">
+                  Genre Distribution
+                </h2>
                 <div className="text-right">
                   <p className="text-2xl font-black text-primary">12</p>
                   <p className="text-xs font-semibold text-muted">Genres</p>
@@ -149,9 +186,24 @@ export function MusicInsightsDashboardScreen() {
                 />
               </div>
               <ul className="space-y-4">
-                <TopArtist rank="01" name="Tame Impala" meta="Psych Rock • 124 listens" tone="violet" />
-                <TopArtist rank="02" name="Lana Del Rey" meta="Art Pop • 98 listens" tone="rose" />
-                <TopArtist rank="03" name="Miles Davis" meta="Jazz • 82 listens" tone="amber" />
+                <TopArtist
+                  rank="01"
+                  name="Tame Impala"
+                  meta="Psych Rock • 124 listens"
+                  tone="violet"
+                />
+                <TopArtist
+                  rank="02"
+                  name="Lana Del Rey"
+                  meta="Art Pop • 98 listens"
+                  tone="rose"
+                />
+                <TopArtist
+                  rank="03"
+                  name="Miles Davis"
+                  meta="Jazz • 82 listens"
+                  tone="amber"
+                />
               </ul>
             </SurfaceCard>
 
@@ -167,7 +219,11 @@ export function MusicInsightsDashboardScreen() {
               </div>
               <ul className="divide-y divide-primary-faint">
                 <TrackRow title="Borderline" artist="Tame Impala" plays={42} />
-                <TrackRow title="Stargirl Interlude" artist="The Weeknd, Lana Del Rey" plays={38} />
+                <TrackRow
+                  title="Stargirl Interlude"
+                  artist="The Weeknd, Lana Del Rey"
+                  plays={38}
+                />
                 <TrackRow title="After Dark" artist="Mr.Kitty" plays={35} />
               </ul>
             </SurfaceCard>
@@ -179,30 +235,62 @@ export function MusicInsightsDashboardScreen() {
                 <span className="rounded-md bg-primary-soft px-2 py-1 text-[10px] font-bold text-primary">
                   Chart
                 </span>
-                <h2 className="text-sm font-bold text-ink">Listening by Hour</h2>
+                <h2 className="text-sm font-bold text-ink">
+                  Listening by Hour
+                </h2>
               </div>
-              <p className="mb-6 text-xs text-muted">Your peak activity is at 10:00 PM</p>
+              <p className="mb-6 text-xs text-muted">
+                Your peak activity is at 10:00 PM
+              </p>
               <div className="flex h-40 items-end justify-between gap-2 border-b border-primary-faint pb-1">
                 {hourBars.map((bar) => (
-                  <div key={bar.label} className="flex flex-1 flex-col items-center gap-2">
+                  <div
+                    key={bar.label}
+                    className="flex flex-1 flex-col items-center gap-2"
+                  >
                     <div
                       className="w-full max-w-[2rem] rounded-t-md bg-gradient-to-t from-primary to-violet-400"
                       style={{ height: `${bar.h}%` }}
                     />
-                    <span className="text-[10px] font-bold text-subtle">{bar.label}</span>
+                    <span className="text-[10px] font-bold text-subtle">
+                      {bar.label}
+                    </span>
                   </div>
                 ))}
               </div>
             </SurfaceCard>
 
             <SurfaceCard className="p-6">
-              <h2 className="mb-6 text-sm font-bold text-ink">Recent History</h2>
+              <h2 className="mb-6 text-sm font-bold text-ink">
+                Recent History
+              </h2>
               <ul className="space-y-0">
-                <HistoryRow title="Selfless" artist="The Strokes" time="2m ago" />
-                <HistoryRow title="Sweater Weather" artist="The Neighbourhood" time="14m ago" />
-                <HistoryRow title="Starboy" artist="The Weeknd" time="28m ago" />
-                <HistoryRow title="Nightcall" artist="Kavinsky" time="45m ago" />
-                <HistoryRow title="Blinding Lights" artist="The Weeknd" time="1h ago" isLast />
+                <HistoryRow
+                  title="Selfless"
+                  artist="The Strokes"
+                  time="2m ago"
+                />
+                <HistoryRow
+                  title="Sweater Weather"
+                  artist="The Neighbourhood"
+                  time="14m ago"
+                />
+                <HistoryRow
+                  title="Starboy"
+                  artist="The Weeknd"
+                  time="28m ago"
+                />
+                <HistoryRow
+                  title="Nightcall"
+                  artist="Kavinsky"
+                  time="45m ago"
+                />
+                <HistoryRow
+                  title="Blinding Lights"
+                  artist="The Weeknd"
+                  time="1h ago"
+                  isLast
+                />
               </ul>
             </SurfaceCard>
           </div>
@@ -211,7 +299,9 @@ export function MusicInsightsDashboardScreen() {
 
       <footer className="border-t border-primary-faint px-6 py-4 text-center text-xs text-subtle">
         <p className="font-semibold text-muted">VibeCheck Engine v2.4.0</p>
-        <p className="mt-1">© 2024 VibeCheck Insight. Data refreshed every 6 hours.</p>
+        <p className="mt-1">
+          © 2024 VibeCheck Insight. Data refreshed every 6 hours.
+        </p>
       </footer>
     </div>
   );
@@ -266,7 +356,15 @@ function TopArtist({
   );
 }
 
-function TrackRow({ title, artist, plays }: { title: string; artist: string; plays: number }) {
+function TrackRow({
+  title,
+  artist,
+  plays,
+}: {
+  title: string;
+  artist: string;
+  plays: number;
+}) {
   return (
     <li className="flex items-center justify-between gap-4 py-4 first:pt-0">
       <div className="min-w-0">
@@ -275,7 +373,9 @@ function TrackRow({ title, artist, plays }: { title: string; artist: string; pla
       </div>
       <div className="shrink-0 text-right">
         <p className="text-lg font-black text-primary">{plays}</p>
-        <p className="text-[10px] font-bold uppercase tracking-wide text-subtle">Plays</p>
+        <p className="text-[10px] font-bold uppercase tracking-wide text-subtle">
+          Plays
+        </p>
       </div>
     </li>
   );

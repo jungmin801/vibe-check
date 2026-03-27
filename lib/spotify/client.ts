@@ -1,4 +1,4 @@
-export async function fetchSpotify(path: string, accessToken: string) {
+export async function requestSpotify(path: string, accessToken: string) {
   const response = await fetch(`https://api.spotify.com${path}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -11,10 +11,34 @@ export async function fetchSpotify(path: string, accessToken: string) {
     throw new Error(`Spotify API error: ${response.status} ${text}`);
   }
 
-  return response.json();
+  return response;
 }
 
-export async function fetchSpotifyApi<T>(path: string, init?: RequestInit) {
+export async function fetchSpotifyJson<T>(path: string, accessToken: string) {
+  const response = await requestSpotify(path, accessToken);
+  return (await response.json()) as T;
+}
+
+export async function fetchSpotifyOptionalJson<T>(
+  path: string,
+  accessToken: string,
+) {
+  const response = await requestSpotify(path, accessToken);
+
+  if (response.status === 204) {
+    return null;
+  }
+
+  const text = await response.text();
+
+  if (!text) {
+    return null;
+  }
+
+  return JSON.parse(text) as T;
+}
+
+export async function fetchRouteJson<T>(path: string, init?: RequestInit) {
   const response = await fetch(path, {
     ...init,
     cache: "no-store",
