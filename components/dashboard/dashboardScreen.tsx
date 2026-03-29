@@ -9,13 +9,6 @@ import { MoonIcon, SunIcon } from "@/components/ui/Icons";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { SurfaceCard } from "@/components/ui/SurfaceCard";
-import {
-  useCurrentlyPlayingQuery,
-  useGenreDistributionQuery,
-  useRecentlyPlayedQuery,
-  useTopArtistsQuery,
-  useTopTracksQuery,
-} from "@/lib/spotify/queries";
 
 const genres = [
   { label: "Synthpop", pct: 38, color: "bg-chart-1" },
@@ -38,17 +31,6 @@ type Theme = "light" | "dark";
 
 export function MusicInsightsDashboardScreen() {
   const [theme, setTheme] = useState<Theme>("light");
-  // const { data: currentlyPlaying } = useCurrentlyPlayingQuery();
-  // const { data: recentlyPlayed } = useRecentlyPlayedQuery(5);
-
-  // console.log("currentlyPlaying", currentlyPlaying);
-  // console.log("recentlyPlayed", recentlyPlayed);
-
-  // const { data: topTracks } = useTopTracksQuery("short_term", 5);
-  // console.log("topTracks", topTracks);
-
-  const { data: genreDistribution } = useGenreDistributionQuery("short_term");
-  console.log("genreDistribution", genreDistribution);
 
   return (
     <div
